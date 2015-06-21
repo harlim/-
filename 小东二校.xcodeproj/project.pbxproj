@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DDC03A7B1B3770C4009A35A2 /* LampViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC03A7A1B3770C4009A35A2 /* LampViewController.m */; };
 		DDC355CA1B2731DB00CF7DC2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC355C91B2731DB00CF7DC2 /* main.m */; };
 		DDC355CD1B2731DB00CF7DC2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC355CC1B2731DB00CF7DC2 /* AppDelegate.m */; };
 		DDC355D01B2731DB00CF7DC2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC355CF1B2731DB00CF7DC2 /* ViewController.m */; };
@@ -47,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DDC03A791B3770C4009A35A2 /* LampViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LampViewController.h; sourceTree = "<group>"; };
+		DDC03A7A1B3770C4009A35A2 /* LampViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LampViewController.m; sourceTree = "<group>"; };
 		DDC355C41B2731DB00CF7DC2 /* 小东二校.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "小东二校.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDC355C81B2731DB00CF7DC2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DDC355C91B2731DB00CF7DC2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -143,6 +146,8 @@
 				DDC355D41B2731DB00CF7DC2 /* Images.xcassets */,
 				DDC355D61B2731DB00CF7DC2 /* LaunchScreen.xib */,
 				DDC355C71B2731DB00CF7DC2 /* Supporting Files */,
+				DDC03A791B3770C4009A35A2 /* LampViewController.h */,
+				DDC03A7A1B3770C4009A35A2 /* LampViewController.m */,
 			);
 			path = "小东二校";
 			sourceTree = "<group>";
@@ -324,6 +329,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDC03A7B1B3770C4009A35A2 /* LampViewController.m in Sources */,
 				DDCCC0531B36C46200D9E048 /* GCDAsyncSocket.m in Sources */,
 				DDC355D01B2731DB00CF7DC2 /* ViewController.m in Sources */,
 				DDC355CD1B2731DB00CF7DC2 /* AppDelegate.m in Sources */,
