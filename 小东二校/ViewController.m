@@ -17,7 +17,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startSpinner) name:@"startAnimation" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopSpinner) name:@"stopAnimation" object:nil];
+    NSLog(@"home viewDidLoad");
+ 
 }
 
 - (void)didReceiveMemoryWarning {
@@ -25,6 +29,17 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)startSpinner{
+    NSLog(@"DVD page startAnimation");
+  //  [self.spinner startAnimating];
+    
+}
+
+-(void)stopSpinner{
+    NSLog(@"DVD page stopAnimation");
+   // [self.spinner stopAnimating];
+    
+}
 
 
 #pragma mark - tableview delegate
@@ -85,10 +100,10 @@
             break;
         case 1:
             if (indexPath.row == 0) {
-                height = 80;
+                height = 44;
             }
             if (indexPath.row == 1) {
-                height = 100;
+                height = 80;
             }
             break;
         case 2:
@@ -96,21 +111,19 @@
                 height = 80;
             }
             if (indexPath.row == 1) {
-                height = 60;
+                height = 200;
             }
             if (indexPath.row == 2) {
                 height = 200;
             }
             break;
         case 3:
-            height = 100;
+            height = 140;
             break;
         case 4:
-            height = 100;
+            height = 80;
             break;
-          
-            
-            
+ 
             
     }
     return height;

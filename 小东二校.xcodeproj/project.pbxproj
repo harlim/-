@@ -25,6 +25,7 @@
 		DDCCC0471B36A52000D9E048 /* speed.png in Resources */ = {isa = PBXBuildFile; fileRef = DDCCC0401B36A52000D9E048 /* speed.png */; };
 		DDCCC0481B36A52000D9E048 /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = DDCCC0411B36A52000D9E048 /* stop.png */; };
 		DDCCC04A1B36A7C500D9E048 /* open.png in Resources */ = {isa = PBXBuildFile; fileRef = DDCCC0491B36A7C500D9E048 /* open.png */; };
+		DDCCC0531B36C46200D9E048 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = DDCCC0521B36C46200D9E048 /* GCDAsyncSocket.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,8 @@
 		DDCCC0401B36A52000D9E048 /* speed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = speed.png; sourceTree = "<group>"; };
 		DDCCC0411B36A52000D9E048 /* stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop.png; sourceTree = "<group>"; };
 		DDCCC0491B36A7C500D9E048 /* open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = open.png; sourceTree = "<group>"; };
+		DDCCC0511B36C46200D9E048 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDAsyncSocket.h; path = GCD/GCDAsyncSocket.h; sourceTree = "<group>"; };
+		DDCCC0521B36C46200D9E048 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCDAsyncSocket.m; path = GCD/GCDAsyncSocket.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +113,8 @@
 				DDC355CE1B2731DB00CF7DC2 /* ViewController.h */,
 				DDC355CF1B2731DB00CF7DC2 /* ViewController.m */,
 				DDC355D11B2731DB00CF7DC2 /* Main.storyboard */,
+				DDCCC0511B36C46200D9E048 /* GCDAsyncSocket.h */,
+				DDCCC0521B36C46200D9E048 /* GCDAsyncSocket.m */,
 				DDC355D41B2731DB00CF7DC2 /* Images.xcassets */,
 				DDC355D61B2731DB00CF7DC2 /* LaunchScreen.xib */,
 				DDC355C71B2731DB00CF7DC2 /* Supporting Files */,
@@ -279,6 +284,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDCCC0531B36C46200D9E048 /* GCDAsyncSocket.m in Sources */,
 				DDC355D01B2731DB00CF7DC2 /* ViewController.m in Sources */,
 				DDC355CD1B2731DB00CF7DC2 /* AppDelegate.m in Sources */,
 				DDC355CA1B2731DB00CF7DC2 /* main.m in Sources */,
@@ -408,6 +414,8 @@
 		DDC355E81B2731DB00CF7DC2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = "小东二校/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -418,6 +426,8 @@
 		DDC355E91B2731DB00CF7DC2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = "小东二校/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
