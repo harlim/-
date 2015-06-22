@@ -9,10 +9,18 @@
 #import "ViewController.h"
 #import "LampViewController.h"
 
-@interface ViewController ()
+@interface ViewController (){
+    UILongPressGestureRecognizer *longPress;
+}
 
 @property (nonatomic,strong) UISwitch *system_power;
+@property (nonatomic,strong) UIButton *system_power_on;
 @property (nonatomic,strong) UIButton *system_power_off;
+
+@property (nonatomic,strong) UISwitch *proj_power;
+@property (nonatomic,strong) UIButton *proj_screen;
+
+
 
 
 //@property (nonatomic,strong) UIStepper *denon_stepperChange;
@@ -38,6 +46,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startSpinner) name:@"startAnimation" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopSpinner) name:@"stopAnimation" object:nil];
+    
+//    UILongPressGestureRecognizer *
+    longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(system_power_shutdown:)];
+    longPress.minimumPressDuration = 3; //定义按的时间
+    
     NSLog(@"home viewDidLoad");
  
 }
@@ -242,35 +255,66 @@
     switch (indexPath.section) {
         case 0:
         {
-            self.system_power_off = (UIButton *)[cell viewWithTag:101];
-            UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(system_power_change:)];
-            longPress.minimumPressDuration = 3; //定义按的时间
-            [self.system_power_off addGestureRecognizer:longPress];
+
+
+            [(UIButton *)[cell viewWithTag:101] addGestureRecognizer:longPress];
+            
+            [(UIButton *)[cell viewWithTag:100] addTarget:self action:@selector(system_power_poweron:) forControlEvents:UIControlEventTouchUpInside];
         }
             break;
         case 1:
-//            if (indexPath.row == 0) {
-//                cellID = projPow;
-//            }
-//            if (indexPath.row == 1) {
-//                cellID = screen;
-//            }
+        {
+            if (indexPath.row == 0) {
+                [(UISwitch *)[cell viewWithTag:111] addTarget:self action:@selector(proj_power_change:) forControlEvents:UIControlEventValueChanged];
+            }
+            if (indexPath.row == 1) {
+                
+                for (UIView *btn in cell.contentView.subviews) {
+                  //  NSLog(@"--------");
+                    if ([btn isKindOfClass:[UIButton class]]) {
+                           [(UIButton *)btn addTarget:self action:@selector(proj_screen_UpAndDown:) forControlEvents:UIControlEventTouchUpInside];
+                    }
+                    
+                    
+                }
+                
+            }
+
+            
+        }
             break;
         case 2:
-//            if (indexPath.row == 0) {
-//                cellID = sabine;
-//            }
+        {
+            if (indexPath.row == 0) {       //sabine
+                [(UISegmentedControl *)[cell viewWithTag:131] addTarget:self action:@selector(sabine_volChange:) forControlEvents:UIControlEventValueChanged];
+            }
+            
             if (indexPath.row == 1) {       //denon
               self.denon_slider_vol = (UISlider *)[cell viewWithTag:141];
                 self.denon_labelValue = (UILabel *)[cell viewWithTag:142];
                 [self.denon_slider_vol addTarget:self action:@selector(denonChangeVol:) forControlEvents:UIControlEventValueChanged];
-         
+                
+            //denon mode
+            [(UISegmentedControl *)[cell viewWithTag:144] addTarget:self action:@selector   (denon_mode_change:) forControlEvents:UIControlEventValueChanged];
+            }
+
+            if (indexPath.row == 2) {   //DVD
+
+                for (UIView *btn in cell.contentView.subviews) {
+                   // NSLog(@"--------");
+                    if ([btn isKindOfClass:[UIButton class]]) {
+                        [(UIButton *)btn addTarget:self action:@selector(DVD_button:) forControlEvents:UIControlEventTouchUpInside];
+                    }
+                    
+                    
+                }
+                
                 
                 
             }
-//            if (indexPath.row == 2) {
-//                cellID = DVD;
-//            }
+    
+            
+        }
             break;
             
         case 3:     //lamp
@@ -285,11 +329,21 @@
             
             break;
         case 4:
-         //   cellID = window;
+            for (UIView *btn in cell.contentView.subviews) {
+                // NSLog(@"--------");
+                if ([btn isKindOfClass:[UIButton class]]) {
+                    [(UIButton *)btn addTarget:self action:@selector(window_button:) forControlEvents:UIControlEventTouchUpInside];
+                }
+            }
             break;
             
         case 5:
-            //   cellID = window;
+            for (UIView *btn in cell.contentView.subviews) {
+                // NSLog(@"--------");
+                if ([btn isKindOfClass:[UIButton class]]) {
+                    [(UIButton *)btn addTarget:self action:@selector(door_button:) forControlEvents:UIControlEventTouchUpInside];
+                }
+            }
             break;
             
     }
@@ -338,11 +392,7 @@
 #pragma mark - action
 
 
-- (IBAction)denonChangeVol:(UISlider *)sender {
-    int stepValue = sender.value;
-    self.denon_labelValue.text = [NSString stringWithFormat:@"%d",stepValue];
-    
-}
+
 
 - (IBAction)lamp_face_Change:(UISlider *)sender {
 //    int stepValue = sender.value;
@@ -358,14 +408,88 @@
 }
 
 
+#pragma mark - 系统电源
 
 
+-(void)system_power_poweron:(UIButton *)sender{
+    NSLog(@"%ld",(long)sender.tag);
+    [[AppDelegate app] sendCom:@"10100"];
+}
 
 
+-(void)system_power_shutdown:(UIButton *)sender{
+   // NSLog(@"%ld",(long)sender.tag);
+   // NSLog(@"%ld",(long)sender.tag);
+    [[AppDelegate app] sendCom:@"10101"];
+}
+
+#pragma mark - 投影
+-(void)proj_power_change:(UISwitch *)sender{
+    NSLog(@"%ld",(long)sender.tag);
+    if (sender.on == YES) {
+       [[AppDelegate app] sendCom:@"10112"];
+    }else{
+        [[AppDelegate app] sendCom:@"10113"];
+    }
+    
+    
+}
+
+-(void)proj_screen_UpAndDown:(UIButton *)sender{
+    NSLog(@"%ld",(long)sender.tag);
+    [[AppDelegate app] sendCom:[NSString stringWithFormat:@"10%ld",sender.tag]];
+    
+}
+
+#pragma mark - 音频处理器
+
+-(void)sabine_volChange:(UISegmentedControl *)sender{
+    NSLog(@"%ld",sender.selectedSegmentIndex);
+    [[AppDelegate app] sendCom:[NSString stringWithFormat:@"1013%ld",sender.selectedSegmentIndex + 2]];
+}
 
 
+#pragma mark - denon
+
+- (IBAction)denonChangeVol:(UISlider *)sender {
+    int stepValue = sender.value;
+    self.denon_labelValue.text = [NSString stringWithFormat:@"%d",stepValue];
+    NSLog(@"A00%02d",stepValue);
+    [[AppDelegate app] sendCom:[NSString stringWithFormat:@"A00%02d",stepValue]];
+    
+}
+
+-(void)denon_mode_change:(UISegmentedControl *)sender{
+    NSLog(@"%ld",sender.selectedSegmentIndex);
+    [[AppDelegate app] sendCom:[NSString stringWithFormat:@"1014%ld",sender.selectedSegmentIndex + 2]];
+    
+}
 
 
+#pragma mark - DVD
+
+-(void)DVD_button:(UIButton *)sender{
+    NSLog(@"%ld",(long)sender.tag);
+    
+}
+
+#pragma mark - window
+    
+-(void)window_button:(UIButton *)sender{
+    NSLog(@"%ld",(long)sender.tag);
+        
+}
+    
+#pragma mark - door
+    
+-(void)door_button:(UIButton *)sender{
+    NSLog(@"%ld",(long)sender.tag);
+        
+}
+    
+    
+    
+    
 
 @end
 
