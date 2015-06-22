@@ -195,6 +195,10 @@
 //    
 //    
 //}
+- (void)_show
+{
+    NSLog(@"touch up inside");
+}
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *systemPow = @"SystemPower";
@@ -258,6 +262,7 @@
 
 
             [(UIButton *)[cell viewWithTag:101] addGestureRecognizer:longPress];
+            [(UIButton *)[cell viewWithTag:101] addTarget:self action:@selector(_show) forControlEvents:UIControlEventTouchUpInside];
             
             [(UIButton *)[cell viewWithTag:100] addTarget:self action:@selector(system_power_poweron:) forControlEvents:UIControlEventTouchUpInside];
         }
@@ -448,6 +453,13 @@
     [[AppDelegate app] sendCom:[NSString stringWithFormat:@"1013%ld",sender.selectedSegmentIndex + 2]];
 }
 
+#pragma mark - 灯光
+
+//-(void)lamp_valueChange:(UISlider *)sender{
+//    int theValue = sender.value;
+//    [[AppDelegate app] sendCom:[NSString stringWithFormat:@"B%02ld%02d",sender.tag-1000,theValue]];
+//}
+
 
 #pragma mark - denon
 
@@ -477,13 +489,14 @@
     
 -(void)window_button:(UIButton *)sender{
     NSLog(@"%ld",(long)sender.tag);
-        
+    [[AppDelegate app] sendCom:[NSString stringWithFormat:@"10%ld",(long)sender.tag]];
 }
     
 #pragma mark - door
     
 -(void)door_button:(UIButton *)sender{
     NSLog(@"%ld",(long)sender.tag);
+     [[AppDelegate app] sendCom:[NSString stringWithFormat:@"10%ld",(long)sender.tag]];
         
 }
     
