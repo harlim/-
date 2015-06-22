@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DDC03A7B1B3770C4009A35A2 /* LampViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC03A7A1B3770C4009A35A2 /* LampViewController.m */; };
+		DDC03A7D1B379166009A35A2 /* door.png in Resources */ = {isa = PBXBuildFile; fileRef = DDC03A7C1B379166009A35A2 /* door.png */; };
 		DDC355CA1B2731DB00CF7DC2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC355C91B2731DB00CF7DC2 /* main.m */; };
 		DDC355CD1B2731DB00CF7DC2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC355CC1B2731DB00CF7DC2 /* AppDelegate.m */; };
 		DDC355D01B2731DB00CF7DC2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC355CF1B2731DB00CF7DC2 /* ViewController.m */; };
@@ -50,6 +51,7 @@
 /* Begin PBXFileReference section */
 		DDC03A791B3770C4009A35A2 /* LampViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LampViewController.h; sourceTree = "<group>"; };
 		DDC03A7A1B3770C4009A35A2 /* LampViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LampViewController.m; sourceTree = "<group>"; };
+		DDC03A7C1B379166009A35A2 /* door.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = door.png; sourceTree = "<group>"; };
 		DDC355C41B2731DB00CF7DC2 /* 小东二校.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "小东二校.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDC355C81B2731DB00CF7DC2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DDC355C91B2731DB00CF7DC2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				DDCCC05A1B36D40100D9E048 /* systemPower.png */,
 				DDCCC05B1B36D40100D9E048 /* vol.png */,
 				DDCCC0631B36D55900D9E048 /* curtain.png */,
+				DDC03A7C1B379166009A35A2 /* door.png */,
 				DDCCC03A1B369E5F00D9E048 /* DVD pic */,
 				DDCCC0331B36599E00D9E048 /* image */,
 				DDC355CB1B2731DB00CF7DC2 /* AppDelegate.h */,
@@ -305,6 +308,7 @@
 				DDCCC05C1B36D40100D9E048 /* denon.png in Resources */,
 				DDCCC0461B36A52000D9E048 /* previous.png in Resources */,
 				DDCCC0601B36D40100D9E048 /* ProjectionScreen.png in Resources */,
+				DDC03A7D1B379166009A35A2 /* door.png in Resources */,
 				DDCCC0441B36A52000D9E048 /* pause.png in Resources */,
 				DDCCC0421B36A52000D9E048 /* fast_backward.png in Resources */,
 				DDCCC0481B36A52000D9E048 /* stop.png in Resources */,

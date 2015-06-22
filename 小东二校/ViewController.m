@@ -10,9 +10,15 @@
 #import "LampViewController.h"
 
 @interface ViewController ()
-@property (nonatomic,strong) UIStepper *denon_stepperChange;
+
+@property (nonatomic,strong) UISwitch *system_power;
+@property (nonatomic,strong) UIButton *system_power_off;
+
+
+//@property (nonatomic,strong) UIStepper *denon_stepperChange;
 @property (nonatomic,strong) UILabel *denon_labelValue;
-@property (nonatomic,strong) UIProgressView *denon_progressValue;
+//@property (nonatomic,strong) UIProgressView *denon_progressValue;
+@property (nonatomic,strong) UISlider *denon_slider_vol;
 
 @property (nonatomic,strong) UILabel *lamp_label_faceValue;
 @property (nonatomic,strong) UILabel *lamp_label_earValue;
@@ -76,7 +82,7 @@
 
 #pragma mark - tableview delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 5;
+    return 6;
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
@@ -95,7 +101,10 @@
             title = @"灯光";
             break;
         case 4:
-            title = @"窗帘";
+            title = @"窗";
+            break;
+        case 5:
+            title = @"门";
             break;
     }
     
@@ -116,6 +125,8 @@
         case 3:
             return 1;
         case 4:
+            return 1;
+        case 5:
             return 1;
         default:
             return 0;
@@ -145,19 +156,21 @@
                 height = 80;
             }
             if (indexPath.row == 1) {
-                height = 200;
+                height = 120;
             }
             if (indexPath.row == 2) {
                 height = 200;
             }
             break;
         case 3:                 //lamp
-            height = 80;
+            height = 60;
             break;
         case 4:
             height = 80;
             break;
- 
+        case 5:
+            height = 120;
+            break;
             
     }
     return height;
@@ -179,7 +192,7 @@
     static NSString *DVD = @"DVD";
     static NSString *lamp = @"Lamp";
     static NSString *window = @"Window";
-  
+    static NSString *door = @"Door";
     
     NSString *cellID = nil;
     
@@ -213,6 +226,11 @@
         case 4:
             cellID = window;
              break;
+        case 5:
+            cellID = door;
+            break;
+            
+            
     }
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
@@ -223,7 +241,12 @@
     
     switch (indexPath.section) {
         case 0:
-           // cellID = systemPow;
+        {
+            self.system_power_off = (UIButton *)[cell viewWithTag:101];
+            UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(system_power_change:)];
+            longPress.minimumPressDuration = 3; //定义按的时间
+            [self.system_power_off addGestureRecognizer:longPress];
+        }
             break;
         case 1:
 //            if (indexPath.row == 0) {
@@ -238,11 +261,10 @@
 //                cellID = sabine;
 //            }
             if (indexPath.row == 1) {       //denon
-               self.denon_stepperChange = (UIStepper *)[cell viewWithTag:141];
+              self.denon_slider_vol = (UISlider *)[cell viewWithTag:141];
                 self.denon_labelValue = (UILabel *)[cell viewWithTag:142];
-                self.denon_progressValue = (UIProgressView *)[cell viewWithTag:143];
-                [self.denon_stepperChange addTarget:self action:@selector(denonChangeVol:) forControlEvents:UIControlEventValueChanged];
-               // UIStepper *stepper =
+                [self.denon_slider_vol addTarget:self action:@selector(denonChangeVol:) forControlEvents:UIControlEventValueChanged];
+         
                 
                 
             }
@@ -265,6 +287,11 @@
         case 4:
          //   cellID = window;
             break;
+            
+        case 5:
+            //   cellID = window;
+            break;
+            
     }
     
     
@@ -311,9 +338,8 @@
 #pragma mark - action
 
 
-- (IBAction)denonChangeVol:(UIStepper *)sender {
+- (IBAction)denonChangeVol:(UISlider *)sender {
     int stepValue = sender.value;
-    [self.denon_progressValue setProgress:(float)stepValue/100];
     self.denon_labelValue.text = [NSString stringWithFormat:@"%d",stepValue];
     
 }
@@ -325,6 +351,11 @@
     
 }
 
+- (IBAction)system_power_change:(UISwitch *)sender {
+
+    
+    
+}
 
 
 
