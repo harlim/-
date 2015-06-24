@@ -27,6 +27,7 @@
 @property (nonatomic,strong) UILabel *denon_labelValue;
 //@property (nonatomic,strong) UIProgressView *denon_progressValue;
 @property (nonatomic,strong) UISlider *denon_slider_vol;
+@property (nonatomic,strong) UISegmentedControl *denon_Segment_mode;
 
 @property (nonatomic,strong) UILabel *lamp_label_faceValue;
 @property (nonatomic,strong) UILabel *lamp_label_earValue;
@@ -43,11 +44,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startSpinner) name:@"startAnimation" object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopSpinner) name:@"stopAnimation" object:nil];
-    
-//    UILongPressGestureRecognizer *
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startSpinner) name:@"startAnimation" object:nil];
+//    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopSpinner) name:@"stopAnimation" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeTheView:) name:@"RevData" object:nil];
+
     longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(system_power_shutdown:)];
     longPress.minimumPressDuration = 3; //定义按的时间
     
@@ -72,12 +73,25 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startSpinner) name:@"startAnimation" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopSpinner) name:@"stopAnimation" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeTheView:) name:@"RevData" object:nil];
     [self.myTableView reloadData];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)dealloc{
+    
 }
 
 -(void)startSpinner{
@@ -270,7 +284,8 @@
         case 1:
         {
             if (indexPath.row == 0) {
-                [(UISwitch *)[cell viewWithTag:111] addTarget:self action:@selector(proj_power_change:) forControlEvents:UIControlEventValueChanged];
+                self.proj_power = (UISwitch *)[cell viewWithTag:111];
+                [self.proj_power addTarget:self action:@selector(proj_power_change:) forControlEvents:UIControlEventValueChanged];
             }
             if (indexPath.row == 1) {
                 
@@ -300,7 +315,8 @@
                 [self.denon_slider_vol addTarget:self action:@selector(denonChangeVol:) forControlEvents:UIControlEventValueChanged];
                 
             //denon mode
-            [(UISegmentedControl *)[cell viewWithTag:144] addTarget:self action:@selector   (denon_mode_change:) forControlEvents:UIControlEventValueChanged];
+                self.denon_Segment_mode = (UISegmentedControl *)[cell viewWithTag:144];
+            [self.denon_Segment_mode addTarget:self action:@selector   (denon_mode_change:) forControlEvents:UIControlEventValueChanged];
             }
 
             if (indexPath.row == 2) {   //DVD
@@ -501,8 +517,35 @@
 }
     
     
+
+-(void)changeTheView:(id)sender{
+    NSString *rev = [[sender userInfo] objectForKey:@"rev"];    //0,73,0,0000000000000000000000000000000000000000   这样的格式，第一位是投影机，二三位是天龙音量，剩下是灯光
+    
+    NSString *proj_status = [rev substringWithRange:NSMakeRange(0, 1)];     //投影机状态
+    if ([proj_status isEqualToString:@"1"]) {
+        self.proj_power.on = YES;
+    }else{
+        self.proj_power.on = NO;
+    }
     
     
+    
+    NSString *denon_vol = [rev substringWithRange:NSMakeRange(2, 2)];       //天龙音量
+    NSInteger denon_vol_int = [denon_vol integerValue];
+    self.denon_slider_vol.value = denon_vol_int;
+    self.denon_labelValue.text = denon_vol;
+    
+    NSString *denon_mode = [rev substringWithRange:NSMakeRange(5, 1)];       //天龙模式
+    NSInteger denon_mode_int = [denon_mode integerValue];
+    self.denon_Segment_mode.selectedSegmentIndex = denon_mode_int-1;
+    
+    
+    NSLog(@"name: %@",denon_vol);
+    
+    
+    
+}
+
 
 @end
 
