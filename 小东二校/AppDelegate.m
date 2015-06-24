@@ -71,7 +71,7 @@
     //else {
     [asyncSocket writeData:[com dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:0];
     // }
-    
+    //
 }
 
 
