@@ -498,7 +498,7 @@
 
 -(void)DVD_button:(UIButton *)sender{
     NSLog(@"%ld",(long)sender.tag);
-    
+     [[AppDelegate app] sendCom:[NSString stringWithFormat:@"C0%ld",(long)sender.tag]];
 }
 
 #pragma mark - window
