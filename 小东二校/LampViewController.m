@@ -20,14 +20,28 @@
     for (UIView *slider in self.view.subviews) {
         if ([slider isKindOfClass:[UISlider class]]) {
             [(UISlider *)slider addTarget:self action:@selector(lamp_valueChange:) forControlEvents:UIControlEventValueChanged];
-            
-            
         }
     }
     
     [[AppDelegate app] sendCom:@"11100"];       //发送dmx.go
     // Do any additional setup after loading the view.
 }
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeTheView:) name:@"RevData" object:nil];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+}
+
+
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -54,6 +68,28 @@
 
 
 
+-(void)changeTheView:(id)sender{
+    
+    NSString *rev = [[sender userInfo] objectForKey:@"rev"];    //0,73,0,0000000000000000000000000000000000000000   这样的格式，第一位是投影机，二三位是天龙音量，剩下是灯光
+    
+
+    
+//    for (UIView *slider in self.view.subviews) {
+//        if ([slider isKindOfClass:[UISlider class]]) {
+//            NSInteger slider_int = slider.tag;
+//            NSString *lamp_value = [rev substringWithRange:NSMakeRange((7 + 2*(slider_int - 1000) - 2), 2)];
+//            NSInteger lamp_int = [lamp_value integerValue];
+//            
+//            UISlider *theSlider = [self.view viewWithTag:slider_int];
+//            theSlider.value = lamp_int;
+//            
+//            
+//        }
+//    }
+    
+    
+}
+    
 
 
 

@@ -115,7 +115,12 @@
 
 
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag{
-    NSLog(@"receive:-->%@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+    NSString *rev = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(@"receive:-->%@",rev);
+    if ([rev length] == 47) {
+        //[[NSNotificationCenter defaultCenter] postNotificationName:@"RevData" object:rev];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"RevData" object:nil userInfo:[NSDictionary dictionaryWithObject:rev forKey:@"rev"]];
+    }
     
     [asyncSocket readDataWithTimeout:-1 tag:0];
     
