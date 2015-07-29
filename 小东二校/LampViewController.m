@@ -72,22 +72,20 @@
     
     NSString *rev = [[sender userInfo] objectForKey:@"rev"];    //0,73,0,0000000000000000000000000000000000000000   这样的格式，第一位是投影机，二三位是天龙音量，剩下是灯光
     
-    //NSString *proj_status = [rev substringWithRange:NSMakeRange(0, 1)];     //投影机状态
+
     
-    
-    
-    for (UIView *slider in self.view.subviews) {
-        if ([slider isKindOfClass:[UISlider class]]) {
-            NSInteger slider_int = slider.tag;
-            NSString *lamp_value = [rev substringWithRange:NSMakeRange((7 + 2*(slider_int - 1000) - 2), 2)];
-            NSInteger lamp_int = [lamp_value integerValue];
-            
-            UISlider *theSlider = [self.view viewWithTag:slider_int];
-            theSlider.value = lamp_int;
-            
-            
-        }
-    }
+//    for (UIView *slider in self.view.subviews) {
+//        if ([slider isKindOfClass:[UISlider class]]) {
+//            NSInteger slider_int = slider.tag;
+//            NSString *lamp_value = [rev substringWithRange:NSMakeRange((7 + 2*(slider_int - 1000) - 2), 2)];
+//            NSInteger lamp_int = [lamp_value integerValue];
+//            
+//            UISlider *theSlider = [self.view viewWithTag:slider_int];
+//            theSlider.value = lamp_int;
+//            
+//            
+//        }
+//    }
     
     
 }

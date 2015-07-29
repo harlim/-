@@ -20,6 +20,9 @@
 @property (nonatomic,strong) UISwitch *proj_power;
 @property (nonatomic,strong) UIButton *proj_screen;
 
+@property (nonatomic,strong) UIButton *proj_HDMI;
+@property (nonatomic,strong) UIButton *proj_DVI;
+@property (nonatomic,strong) UIButton *proj_VGA;
 
 
 
@@ -286,6 +289,17 @@
             if (indexPath.row == 0) {
                 self.proj_power = (UISwitch *)[cell viewWithTag:111];
                 [self.proj_power addTarget:self action:@selector(proj_power_change:) forControlEvents:UIControlEventValueChanged];
+                
+                self.proj_HDMI = (UIButton *)[cell viewWithTag:115];
+                [self.proj_HDMI addTarget:self action:@selector(proj_HDMI_change:) forControlEvents:UIControlEventTouchUpInside];
+                
+                self.proj_DVI = (UIButton *)[cell viewWithTag:116];
+                [self.proj_DVI addTarget:self action:@selector(proj_DVI_change:) forControlEvents:UIControlEventTouchUpInside];
+                
+                self.proj_VGA = (UIButton *)[cell viewWithTag:117];
+                [self.proj_VGA addTarget:self action:@selector(proj_VGA_change:) forControlEvents:UIControlEventTouchUpInside];
+                
+                
             }
             if (indexPath.row == 1) {
                 
@@ -456,6 +470,28 @@
     
 }
 
+
+-(void)proj_HDMI_change:(UIButton *)sender{
+    [[AppDelegate app] sendCom:@"10115"];
+    
+}
+
+
+-(void)proj_DVI_change:(UIButton *)sender{
+    [[AppDelegate app] sendCom:@"10116"];
+    
+}
+
+-(void)proj_VGA_change:(UIButton *)sender{
+    [[AppDelegate app] sendCom:@"10117"];
+    
+}
+
+
+
+
+
+
 -(void)proj_screen_UpAndDown:(UIButton *)sender{
     NSLog(@"%ld",(long)sender.tag);
     [[AppDelegate app] sendCom:[NSString stringWithFormat:@"10%ld",sender.tag]];
@@ -498,7 +534,7 @@
 
 -(void)DVD_button:(UIButton *)sender{
     NSLog(@"%ld",(long)sender.tag);
-    
+     [[AppDelegate app] sendCom:[NSString stringWithFormat:@"C0%ld",(long)sender.tag]];
 }
 
 #pragma mark - window
